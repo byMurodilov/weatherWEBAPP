@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¤↨ jack's project ↨¤</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <section class="rain"></section> <!-- This will display the rain effect -->
+</head>
+<body>
+
+<div class="container">
+    <h1>Weather Info.</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="city1" placeholder="Enter city 1">
+        <input type="text" name="city2" placeholder="Enter city 2">
+        <button type="submit">Compare Weather</button>
+    </form>
+
+    <div class="comparison-container">
+        {% if weather_data1 %}
+        <div class="city-container">
+            <h2>{{ weather_data1.city }}</h2>
+            <div class="weather-info">
+                <p>Temperature: {{ weather_data1.temperature }}°C</p>
+                <p>Description: {{ weather_data1.description }}</p>
+                <img src="http://openweathermap.org/img/wn/{{ weather_data1.icon }}@2x.png" alt="{{ weather_data1.description }}">
+            </div>
+
+            <h3>5-Day Forecast</h3>
+            <ul class="forecast-list">
+                {% for forecast in daily_forecasts1 %}
+                <li class="forecast-item">
+                    <p>{{ forecast.day }}</p>
+                    <p>{{ forecast.min_temp }}°C - {{ forecast.max_temp }}°C</p>
+                    <p>{{ forecast.description }}</p>
+                    <img src="http://openweathermap.org/img/wn/{{ forecast.icon }}@2x.png" alt="{{ forecast.description }}">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if weather_data2 %}
+        <div class="city-container">
+            <h2>{{ weather_data2.city }}</h2>
+            <div class="weather-info">
+                <p>Temperature: {{ weather_data2.temperature }}°C</p>
+                <p>Description: {{ weather_data2.description }}</p>
+                <img src="http://openweathermap.org/img/wn/{{ weather_data2.icon }}@2x.png" alt="{{ weather_data2.description }}">
+            </div>
+
+            <h3>5-Day Forecast</h3>
+            <ul class="forecast-list">
+                {% for forecast in daily_forecasts2 %}
+                <li class="forecast-item">
+                    <p>{{ forecast.day }}</p>
+                    <p>{{ forecast.min_temp }}°C - {{ forecast.max_temp }}°C</p>
+                    <p>{{ forecast.description }}</p>
+                    <img src="http://openweathermap.org/img/wn/{{ forecast.icon }}@2x.png" alt="{{ forecast.description }}">
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- JavaScript for raindrops animation -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    var nbDrop = 858; 
+
+    function randRange(minNum, maxNum) {
+        return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+    }
+
+    function createRain() {
+        for (var i = 1; i < nbDrop; i++) {
+            var dropLeft = randRange(0, 1600);
+            var dropTop = randRange(-1000, 1400);
+            $('.rain').append('<div class="drop" id="drop'+i+'"></div>');
+            $('#drop'+i).css('left', dropLeft);
+            $('#drop'+i).css('top', dropTop);
+        }
+    }
+
+    createRain();
+</script>
+</body>
+</html>

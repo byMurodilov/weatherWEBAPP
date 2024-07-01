@@ -1,0 +1,139 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #610b68, #6f1067); /* Gradient background */
+    color: #44ff00; /*  text */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide overflow to prevent scrollbars */
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #333; /* Dark background */
+    color: #44ff00; /*  text */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #b24592;
+    margin-bottom: 20px;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form input[type="text"], form button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ff00ff; /* Neon magenta border */
+    border-radius: 4px;
+    margin: 5px;
+    background-color: transparent; /* Transparent background */
+    color: #44ff00; /* text */
+}
+
+form button {
+    background-color: #ff00ff; /* Neon magenta */
+    color: #2e182e; /* text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #44ff00; /* magenta on hover */
+}
+
+.comparison-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.city-container {
+    flex: 1;
+    background-color: #4d4d4d; /* Dark gray */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.city-container h2 {
+    color: #c02425; /* Neon magenta */
+    margin-bottom: 10px;
+}
+
+.weather-info {
+    margin-bottom: 20px;
+}
+
+.weather-info p {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #b24592; /* Neon magenta */
+}
+
+.forecast-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.forecast-item {
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+    background-color: #ffffff; /* Dark gray */
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-item img {
+    margin-top: 10px;
+    max-width: 50px;
+}
+
+/* Styles for rain animation */
+.rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Ensures raindrops do not interfere with form inputs */
+}
+
+.drop {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(13, 52, 58, 1)), to(rgba(255, 255, 255, 0.6)));
+    background: -moz-linear-gradient(top, rgba(13, 52, 58, 1) 0%, rgba(255, 255, 255, .6) 100%);
+    width: 1px;
+    height: 89px;
+    position: absolute;
+    bottom: 200px;
+    -webkit-animation: fall .63s linear infinite;
+    -moz-animation: fall .63s linear infinite;
+}
+
+@-webkit-keyframes fall {
+    to {
+        margin-top: 900px;
+    }
+}
+
+@-moz-keyframes fall {
+    to {
+        margin-top: 900px;
+    }
+}
